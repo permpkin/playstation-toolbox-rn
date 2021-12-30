@@ -21,8 +21,6 @@ const DeviceScreen = ({ route, navigation }: any) => {
 
   const { device } = route.params
 
-  console.log("GO")
-
   return (
     <SafeAreaView style={Style.safe}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -36,13 +34,15 @@ const DeviceScreen = ({ route, navigation }: any) => {
               {device.type}
             </Text>
             <Text text90 grey50>
-              {device.mac} - {device.ip}
+              {device.ip}
             </Text>
           </View>
         </Card>
 
         <Card style={Style.card} onPress={()=>{
-          navigation.navigate("Trainer")
+          navigation.navigate("Trainer", {
+            device
+          })
         }}>
           <View style={Style.cardIcon}>
             <Icon name="memory" size={32} />
@@ -58,7 +58,9 @@ const DeviceScreen = ({ route, navigation }: any) => {
         </Card>
 
         <Card style={Style.card} onPress={()=>{
-          navigation.navigate("Packages")
+          navigation.navigate("Packages", {
+            device
+          })
         }}>
           <View style={Style.cardIcon}>
             <Icon name="package-variant" size={32} />
@@ -74,7 +76,9 @@ const DeviceScreen = ({ route, navigation }: any) => {
         </Card>
 
         <Card style={Style.card} onPress={()=>{
-          navigation.navigate("Payloads")
+          navigation.navigate("Payloads", {
+            device
+          })
         }}>
           <View style={Style.cardIcon}>
             <Icon name="iframe-braces-outline" size={32} />
@@ -88,6 +92,25 @@ const DeviceScreen = ({ route, navigation }: any) => {
             </Text>
           </View>
         </Card>
+
+        <Card style={Style.card} onPress={()=>{
+          navigation.navigate("WebkitHost", {
+            device
+          })
+        }}>
+          <View style={Style.cardIcon}>
+            <Icon name="server-network" size={32} />
+          </View>
+          <View padding-10>
+            <Text text80BO grey10>
+              Webkit Host
+            </Text>
+            <Text text90 grey50>
+              Exploit Host Provider.
+            </Text>
+          </View>
+        </Card>
+
       </ScrollView>
     </SafeAreaView>
   );

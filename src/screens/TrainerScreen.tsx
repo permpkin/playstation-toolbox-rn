@@ -20,9 +20,11 @@ import {
 import { Image, Card, Button, Text, ActionSheet, TextField } from 'react-native-ui-lib';
 import axios, { AxiosResponse } from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import WebRTE from '../services/WebRTE';
+import WEB_RTE from '../services/WebRTE';
 
-const TrainerScreen = ({ navigation }: any) => {
+const TrainerScreen = ({ route, navigation }: any) => {
+
+  const { device } = route.params;
 
   const [matching, setMatching] = useState(true)
   const [activeApp, setActiveApp] = useState<any>(null)
@@ -31,6 +33,8 @@ const TrainerScreen = ({ navigation }: any) => {
   const [app, setApp] = useState<any>(null)
   const [search, setSearch] = useState("")
   var processes: any = []
+
+  const WebRTE = new WEB_RTE(`http://${device.ip}`)
 
   useEffect(() => {
    // Use [] as second argument in useEffect for not rendering each time
@@ -182,7 +186,8 @@ const TrainerScreen = ({ navigation }: any) => {
         version: row.version,
     }))
     navigation.navigate("TrainerApplet", {
-      apps: versions
+      apps: versions,
+      device: device
     })
    }
 
@@ -348,7 +353,7 @@ const Style = StyleSheet.create({
     borderRadius: 5
   },
   cardIconMissing: {
-    backgroundColor: "#f5980d",
+    backgroundColor: "#151515",
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",

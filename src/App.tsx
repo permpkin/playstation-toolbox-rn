@@ -17,8 +17,6 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ConnectionStatusBar } from 'react-native-ui-lib';
 import AddCustomScreen from './screens/AddCustomScreen';
-import DeviceNavigator from './screens/DeviceNavigator';
-import DrawerCmp from './Drawer';
 import DashboardScreen from './screens/DashboardScreen';
 import DeviceScreen from './screens/DeviceScreen';
 import SettingsScreen from './screens/SettingsScreen';
@@ -26,6 +24,8 @@ import TrainerScreen from './screens/TrainerScreen';
 import PackagesScreen from './screens/PackagesScreen';
 import PayloadsScreen from './screens/PayloadsScreen';
 import TrainerAppletScreen from './screens/TrainerAppletScreen';
+import WebkitHostScreen from './screens/WebkitHostScreen';
+import PackageDetailScreen from './screens/PackageDetailScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -107,10 +107,32 @@ const App = () => {
               }}
             />
             <Stack.Screen
+              name="PackageDetail"
+              component={PackageDetailScreen}
+              options={({ route }: any) => ({
+                title: `${route.params?.pkg?.name}`,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#151515"
+                }
+              })}
+            />
+            <Stack.Screen
               name="Payloads"
               component={PayloadsScreen}
               options={{
                 headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#151515"
+                }
+              }}
+            />
+            <Stack.Screen
+              name="WebkitHost"
+              component={WebkitHostScreen}
+              options={{
+                headerTintColor: "#fff",
+                title: "Webkit Host",
                 headerStyle: {
                   backgroundColor: "#151515"
                 }

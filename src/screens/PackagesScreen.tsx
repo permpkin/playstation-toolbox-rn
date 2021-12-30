@@ -43,8 +43,10 @@
    releaseddate: string;
  }
  
- const PackagesScreen = ({ navigation }: any) => {
- 
+ const PackagesScreen = ({ route, navigation }: any) => {
+
+  const { device } = route.params;
+
   const [busy, setBusy] = useState(true)
    const [packageState, setPackageState] = useState(PACKAGE_NONE)
    const [dialogVisible, setDialogVisible] = useState(false)
@@ -110,22 +112,12 @@
             onPress={() => {
               console.log('This is a button!')
             }}
+            style={Style.icon}
             size={20}
           />
         ),
       });
     }, [navigation]);
- 
-   const sendPackage = (pkg: Package) => {
-     setPackageState(PACKAGE_SENDING)
-     setDialogVisible(true)
-     //TODO: send package file
-     console.log(pkg)
-     setTimeout(() => {
-       setPackageState(PACKAGE_SENT)
-       if (!dialogVisible) setDialogVisible(true)
-     }, 1200);
-   }
  
    return (
      <SafeAreaView style={Style.safe}>
@@ -139,8 +131,11 @@
             })}
             renderItem={({ item, index }: any) => (
               <TouchableHighlight onPress={() => {
-                sendPackage(item)
-              }} key={index}>
+                navigation.navigate("PackageDetail", {
+                  device: device,
+                  pkg: item
+                })
+              }} key={index} underlayColor="#CCC">
                 <View margin-10 style={Style.row}>
                   <View style={Style.cardRowIcon}>
                     <Image
@@ -291,6 +286,9 @@
       top: 0,
       bottom: 0
     },
+    icon: {
+      color: "#fff"
+    }
  });
  
  export default PackagesScreen;

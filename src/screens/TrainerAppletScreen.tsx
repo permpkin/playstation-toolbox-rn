@@ -17,7 +17,7 @@ import {
 import { Button, Card, Image, Switch, Text, View } from 'react-native-ui-lib';
 import axios, { AxiosResponse } from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import WebRTE from '../services/WebRTE';
+import WEB_RTE from '../services/WebRTE';
 import Utils from '../services/Utils';
 import bigInt from 'big-integer'
 
@@ -39,7 +39,7 @@ interface AppSet {
 
 const TrainerAppletScreen = ({ route, navigation }: any) => {
 
-  const { apps } = route.params;
+  const { device, apps } = route.params;
   const initialApp = apps[0] // TODO: add catch here
 
   const [busy, setBusy] = useState(true)
@@ -50,6 +50,11 @@ const TrainerAppletScreen = ({ route, navigation }: any) => {
   const [stateAll, setStateAll] = useState(false)
   const [app, setApp] = useState<AppSet>()
   const [mods, setMods] = useState<Array<ModSet>>([])
+
+  const WebRTE = new WEB_RTE(`http://${device.ip}`)
+  // static basePort: string = ":771"
+  // static process_name: string = "webrtc_daemon.self"
+  // static timeout: number = 3000
 
   // const device_ip = "10.0.0.254" // TODO: passthrough ip
   // const baseUrl = "http://" + device_ip + ":771/";

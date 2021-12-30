@@ -18,8 +18,7 @@ const FindLanConsoles = ({ navigation }: any) => {
       type: "Playstation 4",
       variant: "Pro",
       hen: "GoldHen2.0b",
-      mac: "00:00:00:00:00:00",
-      ip: "10.0.0.254"
+      ip: "10.0.0.149"
     }
   ])
 
@@ -28,7 +27,7 @@ const FindLanConsoles = ({ navigation }: any) => {
       <Text margin-5 text90BO>{`Found ${devices.length} Device(s)`}</Text>
       {devices.map(device => (
         <Card
-          key={device.mac}
+          key={device.ip}
           flex
           style={Style.card}
           onPress={() => navigation.navigate('Overview', {
@@ -44,9 +43,6 @@ const FindLanConsoles = ({ navigation }: any) => {
             </Text>
             <Text text80BO grey10>
               {`${device.hen}`}
-            </Text>
-            <Text text90 grey50>
-              {`${device.mac}`}
             </Text>
             <Text text90 grey50>
               {`IP: ${device.ip}`}

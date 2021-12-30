@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios -- --reset-cache",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
@@ -19,11 +19,15 @@
     "buffer": "^6.0.3",
     "react": "17.0.2",
     "react-native": "0.66.4",
+    "react-native-fs": "^2.16.0",
     "react-native-gesture-handler": "^2.1.0",
+    "react-native-http-bridge": "^0.6.1",
     "react-native-navbar-color": "^1.0.3",
+    "react-native-network-info": "^5.2.1",
     "react-native-reanimated": "^2.3.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
+    "react-native-tcp-socket": "^5.5.0",
     "react-native-ui-lib": "^6.6.2",
     "react-native-vector-icons": "^9.0.0"
   },
@@ -39,5 +43,8 @@
     "metro-react-native-babel-preset": "^0.66.2",
     "react-test-renderer": "17.0.2",
     "typescript": "^4.5.4"
+  },
+  "react-native": {
+    "net": "react-native-tcp-socket"
   }
 }
