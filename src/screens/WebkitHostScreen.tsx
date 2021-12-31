@@ -19,9 +19,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios, { AxiosResponse } from 'axios';
 import { NetworkInfo } from 'react-native-network-info';
 // import StaticServer from 'react-native-static-server';
-import RNFS from 'react-native-fs';
-import { DeviceEventEmitter } from 'react-native';
-// import { Server } from 'react-native-http-bridge';
+// import RNFS from 'react-native-fs';
+// import { DeviceEventEmitter } from 'react-native';
+import httpBridge from 'react-native-http-bridge';
+// import { HTTPServer, Router }  from 'http-server-react-native';
+
 
 const WebkitHostScreen = ({ navigation }: any) => {
 
@@ -31,11 +33,25 @@ const WebkitHostScreen = ({ navigation }: any) => {
   const [uptime, setUptime] = useState<string>("0m")
   const [sfrate, setSFRate] = useState<string>("0/0")
 
+  // const router = new Router('/');
+
+  // router
+  //   .get((data: any) => {
+  //     return { status: 200, data: { some: 'data' } };
+  //   })
+
+  // const server = new HTTPServer({ port: 8080 });
+  
+  // server.registerRouter(router);
+  // server
+  //   .start()
+  //   .then((url: any) => console.log(`Server running on ${url}`))
+  //   .catch((err: any) => console.error(err))
+
 // console.log(Server)
 
 // var httpBridge = require('react-native-http-bridge');
 
-// Server.start(1234, 'exploit_host_service');
 
 // const hostCallback = (request: any) => {
 
@@ -112,8 +128,19 @@ const WebkitHostScreen = ({ navigation }: any) => {
      setHostEnabled(!hostEnabled)
      if (hostEnabled) {
       // kill hosting
+      httpBridge.stop()
      } else {
        // start hosting
+       httpBridge.start(1234, 'exploit_host_service', (request: any) => {
+
+        // you can use request.url, request.type and request.postData here
+        if (request.type === "GET" && request.url.split("/")[1] === "users") {
+          httpBridge.respond(request.requestId, 200, "application/json", "{\"message\": \"OK\"}");
+        } else {
+          httpBridge.respond(request.requestId, 400, "application/json", "{\"message\": \"Bad Request\"}");
+        }
+      
+      });
      }
    }
 

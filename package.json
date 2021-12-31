@@ -21,7 +21,7 @@
     "react-native": "0.66.4",
     "react-native-fs": "^2.16.0",
     "react-native-gesture-handler": "^2.1.0",
-    "react-native-http-bridge": "^0.6.1",
+    "react-native-http-bridge": "https://github.com/babeone/react-native-http-bridge.git",
     "react-native-navbar-color": "^1.0.3",
     "react-native-network-info": "^5.2.1",
     "react-native-reanimated": "^2.3.1",
