@@ -26,7 +26,7 @@ const TrainerScreen = ({ route, navigation }: any) => {
 
   const { device } = route.params;
 
-  const [matching, setMatching] = useState(true)
+  const [matching, setMatching] = useState(false)
   const [activeApp, setActiveApp] = useState<any>(null)
   const [busy, setBusy] = useState(true)
   const [apps, setApps] = useState([])
@@ -81,7 +81,7 @@ const TrainerScreen = ({ route, navigation }: any) => {
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     }))
     setBusy(false)
-    scanActiveApp()
+    // scanActiveApp()
    });
    }, []);
 
@@ -173,7 +173,8 @@ const TrainerScreen = ({ route, navigation }: any) => {
     console.log("USE_APP", versions[0])
     navigation.navigate("TrainerApplet", {
       processes: processes,
-      apps: versions
+      apps: versions,
+      device: device
     })
   }
 
